@@ -1,0 +1,90 @@
+{% extends 'wypozyczalnia/base.html' %}
+{% load static %}
+{% block content %}
+    <header class="masthead text-white text-center" id="startwynik">
+        <div class="container">
+            <h1 class="text-uppercase">{{ s.marka }} {{ s.model }}</h1>
+            <img class="img-fluid mb-5 d-block mx-auto" src="{% static "wypozyczalnia/img/gwiazda_white.png" %}" alt="">
+            <h3> - Odbiór: {{ data_odb }} - {{ miejsce_odb }} -</h3>
+            <h3>- Zwrot: {{ data_zwr }} - {{ miejsce_zwr }} -</h3>
+        </div>
+    </header>
+
+    {% load mathfilters %}
+    <main>
+        <section id="potwierdzenie">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-12 col-md-7">
+                        <h3>{{ s.marka }} {{ s.model }}</h3>
+                        <img src="/static/wypozyczalnia/img/samochody/sam_png/{{ s.zdjecie }}.png" alt="">
+                    </div>
+
+                    <div class="col-sm-12 col-md-5 wyniki_sam_list">
+                        <img class="float-left" src="/static/wypozyczalnia/img/min/1.png" alt="">
+                        <p>{{ s.miejsca }}</p>
+                        <img class="float-left" src="/static/wypozyczalnia/img/min/2.png" alt="">
+                        <p>{{ s.pakownosc }}</p>
+                        <img class="float-left" src="/static/wypozyczalnia/img/min/3.png" alt="">
+                        <p>{{ s.drzwi }}</p>
+                        <img class="float-left" src="/static/wypozyczalnia/img/min/4.png" alt="">
+                        <p>{{ s.skrzynia }}</p>
+                        <img class="float-left" src="/static/wypozyczalnia/img/min/5.png" alt="">
+                        <p>{{ s.klimatyzacja }}</p>
+                        <img class="float-left" src="/static/wypozyczalnia/img/min/6.png" alt="">
+                        <p>{{ s.paliwo }}</p>
+                    </div>
+
+
+                </div>
+
+                <div class="row podsumowanie_kosztow">
+                    <div class="col-sm-12">
+                        <h3>Podsumowanie kosztów</h3>
+                    </div>
+                    <div class="col-sm-12">
+                        <hr>
+                    </div>
+                    <div class="col-sm-6">
+                        <h5>Wynajem auta</h5>
+                    </div>
+                    <div class="col-sm-6 text-right">
+                        <h5>{{ dni|mul:s.cena }} zł</h5>
+                    </div>
+                    <div class="col-sm-12">
+                        <hr>
+                    </div>
+                    <div class="col-sm-6">
+                        <h5>Opłata przygotowawcza</h5>
+                    </div>
+                    <div class="col-sm-6 text-right">
+                        <h5>49 zł</h5>
+                    </div>
+                    <div class="col-sm-12">
+                        <hr>
+                    </div>
+                    <div class="col-sm-6">
+                        <h5>Kaucja zwrotna</h5>
+                    </div>
+                    <div class="col-sm-6 text-right">
+                        <h5>{{ s.kaucja }} zł</h5>
+                    </div>
+                    <div class="col-sm-12">
+                        <hr>
+                    </div>
+
+                </div>
+
+                <div class="row suma">
+                    <div class="col-sm-12 text-right">
+                        <h3>Suma: {{ dni|add:s.cena|add:49|add:s.kaucja }} zł</h3>
+                        <form method="POST">
+                            {% csrf_token %}
+                            <input name="sam" id="id_sam" type="hidden" value="{{ s.id }}">
+                            <button name="rezerwuj" type="submit" class="btn btn-success btn-lg">Rezerwuj</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+{% endblock %}

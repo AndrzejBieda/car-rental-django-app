@@ -1,0 +1,161 @@
+{% extends 'wypozyczalnia/base.html' %}
+{% load static %}
+{% block content %}
+    <header class="masthead text-white text-center" id="start">
+        <div class="container">
+            <img class="img-fluid mb-5 d-block mx-auto rounded-circle" src="{% static "wypozyczalnia/img/car1.jpg" %}"
+                 alt="">
+            <h1 class="text-uppercase">Car Rent</h1>
+            <img class="img-fluid mb-5 d-block mx-auto" src="{% static "wypozyczalnia/img/gwiazda_white.png" %}" alt="">
+            <h3>- Atrakcyjne ceny wynajmu samochodów -</h3>
+            <br>
+
+        </div>
+        <div class="container">
+            <form method="POST">
+                {% csrf_token %}
+                <div class="row">
+
+                    <div class="col-md-6 form-group">
+                        <label for="exampleSelect1">Miejsce odbioru</label>
+                        <select class="form-control" name="miejsce_odb" id="id_miejsce_odb">
+                            {% for m in miejsca %}
+                                <option>{{ m.adres }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="col-md-6 form-group">
+                        <label for="exampleSelect2">Miejsce zwrotu</label>
+                        <select class="form-control" name="miejsce_zwr" id="id_miejsce_zwr">
+                            {% for m in miejsca %}
+                                <option>{{ m.adres }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+
+                </div>
+                <div class="row">
+                    <div class="col-md-6 form-group">
+                        <label for="example-date-input1" class="col-form-label">Data odbioru</label>
+                        <input class="form-control" type="date" value="{{ today }}"
+                               name="data_odb" id="id_data_odb">
+                    </div>
+
+                    <div class="col-md-6 form-group">
+                        <label for="example-date-input2" class="col-form-label">Data zwrotu</label>
+                        <input class="form-control" type="date" value="{{ today }}"
+                               name="data_zwr" id="id_data_zwr">
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-light btn-lg">Wyszukaj</button>
+            </form>
+        </div>
+    </header>
+
+
+    <main>
+
+        <section id="samochody">
+
+            <div class="container">
+
+                <h2 class="text-uppercase">Nasze samochody</h2>
+                <img class="img-fluid mb-5 d-block mx-auto gwiazda"
+                     src="{% static "wypozyczalnia/img/gwiazda_black.png" %}" alt="">
+
+                <div class="row">
+                    {% for s in samochody %}
+                        <div class="col-md-6 col-lg-4">
+
+                            <figure>
+
+                                <a href="static/wypozyczalnia/img/samochody/sam_full/{{ s.zdjecie }}.jpg"
+                                   data-lightbox="galeria"
+                                   data-title="{{ s.marka }} {{ s.model }}"><img
+                                        src="static/wypozyczalnia/img/samochody/sam_mini/{{ s.zdjecie }}.jpg"
+                                        data-lightbox="galeria"
+                                        data-title="{{ s.marka }} {{ s.model }}"
+                                        alt="{{ s.marka }} {{ s.model }}"></a>
+                                <figcaption>{{ s.marka }} {{ s.model }}</figcaption>
+
+                            </figure>
+
+                        </div>
+                    {% endfor %}
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <section id="oferta">
+            <div class="container">
+                <h2 class="text-uppercase">Oferta</h2>
+                <img class="img-fluid mb-5 d-block mx-auto gwiazda"
+                     src="{% static "wypozyczalnia/img/gwiazda_white.png" %}" alt="">
+
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis a eleifend augue. Pellentesque aliquam
+                    mauris diam. Mauris a diam ut ipsum laoreet iaculis. Vestibulum luctus in felis ut rutrum. Nunc nisl
+                    elit, vulputate cursus ornare non, commodo ac ligula.</p>
+
+                <ul>
+
+                    <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis a eleifend augue. Pellentesque
+                        aliquam
+                        mauris diam. Mauris a diam ut ipsum laoreet iaculis. Vestibulum luctus in felis ut rutrum. Nunc
+                        nisl
+                        elit, vulputate cursus ornare non, commodo ac ligula.
+                    </li>
+                    <li>Vestibulum luctus in felis ut rutrum. Nunc nisl elit, vulputate cursus ornare non, commodo ac
+                        ligula. Sed pellentesque aliquet nunc quis ultricies. Donec sollicitudin dignissim facilisis.
+                    </li>
+                    <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis a eleifend augue. Pellentesque
+                        aliquam
+                        mauris diam. Mauris a diam ut ipsum laoreet iaculis. Vestibulum luctus in felis ut rutrum.
+                    </li>
+                    <li>Ut suscipit in diam ac dignissim. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
+                        mollis leo nunc, in laoreet est efficitur vitae.
+                    </li>
+
+                </ul>
+
+                <p>Vestibulum luctus in felis ut rutrum. Nunc nisl elit, vulputate cursus ornare non, commodo ac ligula.
+                    Sed
+                    pellentesque aliquet nunc quis ultricies.</p>
+
+            </div>
+        </section>
+
+        <section id="o_nas">
+            <div class="container">
+                <h2 class="text-uppercase">O nas</h2>
+                <img class="img-fluid mb-5 d-block mx-auto gwiazda"
+                     src="{% static "wypozyczalnia/img/gwiazda_black.png" %}" alt="">
+
+                <div class="row">
+
+                    <p class="col-md-12 col-lg-6">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis a
+                        eleifend
+                        augue. Pellentesque aliquam mauris diam. Mauris a diam ut ipsum laoreet iaculis. Vestibulum
+                        luctus
+                        in felis ut rutrum. Nunc nisl elit, vulputate cursus ornare non, commodo ac ligula. Sed
+                        pellentesque
+                        aliquet nunc quis ultricies. Donec sollicitudin dignissim facilisis. Nam tristique vestibulum
+                        elit
+                        vel vestibulum. Integer et finibus ex. Morbi nunc est, fermentum at est vel, varius volutpat
+                        eros.
+                        Aenean nec malesuada neque.</p>
+                    <p class="col-md-12 col-lg-6">Ut suscipit in diam ac dignissim. Lorem ipsum dolor sit amet,
+                        consectetur
+                        adipiscing elit. Sed mollis leo nunc, in laoreet est efficitur vitae. Praesent quis pretium
+                        mauris.
+                        Aenean sodales neque at elit maximus, viverra luctus magna aliquet. Integer vestibulum viverra
+                        mauris, ac lobortis mauris. Suspendisse placerat tincidunt lectus, id imperdiet dolor bibendum
+                        fermentum. Donec sed pulvinar magna. Nunc quis elit dapibus, aliquet nunc non, blandit elit.
+                        Donec
+                        porttitor velit in erat vestibulum egestas.</p>
+                </div>
+            </div>
+        </section>
+{% endblock %}

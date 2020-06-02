@@ -1,0 +1,25 @@
+{% extends 'wypozyczalnia/base.html' %}
+
+{% block content %}
+    <header class="masthead text-white text-center" id="startrej">
+        <div class="container">
+            <h1 class="text-uppercase">Rejestracja</h1>
+            <img class="img-fluid mb-5 d-block mx-auto" src="/static/wypozyczalnia/img/gwiazda_white.png" alt="">
+        </div>
+    </header>
+
+
+    <main>
+
+        <section id="rejestracja">
+            <div class="container">
+                <form class="form-horizontal" method="POST">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <button id="rej" name="rej" class="btn btn-success" type="submit">Rejestracja</button>
+                </form>
+                </p>
+            </div>
+        </section>
+
+{% endblock %}

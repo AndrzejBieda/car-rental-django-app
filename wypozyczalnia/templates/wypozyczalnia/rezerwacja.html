@@ -1,0 +1,22 @@
+{% extends 'wypozyczalnia/base.html' %}
+{% load static %}
+{% block content %}
+    <header class="masthead text-white text-center" id="startwynik">
+        <div class="container">
+            <h1 class="text-uppercase">Rezerwacja przebiegła pomyślnie</h1>
+            <img class="img-fluid mb-5 d-block mx-auto" src="/static/wypozyczalnia/img/gwiazda_white.png" alt="">
+        </div>
+    </header>
+
+
+    <main>
+
+        <section id="potwierdzenie">
+            <div class="container text-center">
+                <h3>Zarezerwowałeś samochód</h3>
+                <h3 class="font-weight-bold">{{ s.marka }} {{ s.model }}</h3>
+                <h3> - Odbiór: {{ data_odb }} - {{ miejsce_odb }} -</h3>
+                <h3>- Zwrot: {{ data_zwr }} - {{ miejsce_zwr }} -</h3>
+            </div>
+        </section>
+{% endblock %}
